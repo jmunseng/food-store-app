@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdLogout, MdShoppingBasket, MdAdd } from "react-icons/md";
-import Logo from "./img/logo.png";
-import Avatar from "./img/avatar.png";
+import Logo from "../img/logo.png";
+import Avatar from "../img/avatar.png";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const Header = () => {
     });
   };
   return (
-    <header className="w-screen fixed z-50 p-3 px-4 md:p-6 md:px-16">
+    <header className="w-screen fixed z-50 p-3 px-4 md:p-6 md:px-16 bg-primary">
       {/* {desktop & tablet} */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2">
@@ -148,16 +148,36 @@ const Header = () => {
                 </Link>
               )}
               <ul className="flex flex-col">
-                <li className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2">
+                <li
+                  className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2"
+                  onClick={() => {
+                    setIsMenu(false);
+                  }}
+                >
                   Home
                 </li>
-                <li className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2">
+                <li
+                  className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2"
+                  onClick={() => {
+                    setIsMenu(false);
+                  }}
+                >
                   Menu
                 </li>
-                <li className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2">
+                <li
+                  className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2"
+                  onClick={() => {
+                    setIsMenu(false);
+                  }}
+                >
                   About Us
                 </li>
-                <li className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2">
+                <li
+                  className="text-base text-textColor cursor-pointer hover:text-headingColor duration-100 transition-all ease-out  px-4 py-2"
+                  onClick={() => {
+                    setIsMenu(false);
+                  }}
+                >
                   Service
                 </li>
               </ul>

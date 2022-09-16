@@ -1,11 +1,23 @@
-import React from "react";
-import { HomeContainer, RowContainer } from "./index";
+import React, { useEffect, useRef } from "react";
+import {
+  CartContainer,
+  HomeContainer,
+  MenuContainer,
+  RowContainer,
+} from "./index";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useStateValue } from "../context/StateProvider";
 
 const MainContainer = () => {
-  const [{ foodItems }, dispatch] = useStateValue();
+  const [{ foodItems, cartShow }, dispatch] = useStateValue();
+  const rowContainerRef = useRef();
+
+  const scroll = (scrollOffset) => {
+    rowContainerRef.current.scrollLeft += scrollOffset;
+  };
+
+  useEffect(() => {}, [cartShow]);
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center ">
@@ -18,20 +30,29 @@ const MainContainer = () => {
           <div className=" hidden items-center justify-center md:flex gap-3">
             <motion.div
               whileTap={{ scale: 0.75 }}
-              className="w-8 h-8 rounded-lg bg-orange-300 flex items-center justify-center hover:bg-orange-500 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"
+              onClick={() => scroll(-500)}
+              className="w-8 h-8 rounded-lg bg-orange-300 flex items-center justify-center hover:bg-orange-500 cursor-pointer hover:shadow-lg"
             >
               <MdChevronLeft className=" text-lg text-white" />
             </motion.div>
             <motion.div
               whileTap={{ scale: 0.75 }}
-              className="w-8 h-8 rounded-lg bg-orange-300 flex items-center justify-center hover:bg-orange-500 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg"
+              onClick={() => scroll(+500)}
+              className="w-8 h-8 rounded-lg bg-orange-300 flex items-center justify-center hover:bg-orange-500 cursor-pointer hover:shadow-lg"
             >
               <MdChevronRight className=" text-lg text-white" />
             </motion.div>
           </div>
         </div>
-        <RowContainer flag={true} />
+        <RowContainer
+          rowContainerRef={rowContainerRef}
+          flag={true}
+          data={foodItems?.filter((n) => n.category === "fruits")}
+        />
       </section>
+
+      <MenuContainer />
+      {cartShow && <CartContainer />}
     </div>
   );
 };
